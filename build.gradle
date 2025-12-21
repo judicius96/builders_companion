@@ -1,0 +1,121 @@
+// Root build.gradle for Builders Companion multi-project
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+        maven { url = "https://maven.minecraftforge.net/" }
+    }
+    dependencies {
+        classpath "net.minecraftforge.gradle:ForgeGradle:[6.0,6.2)"
+        classpath "com.github.johnrengelman:shadow:8.1.1"
+    }
+}
+
+subprojects {
+    apply plugin: "java"
+    apply plugin: "eclipse"
+    apply plugin: "idea"
+    apply plugin: "maven-publish"
+    apply plugin: "net.minecraftforge.gradle"
+    apply plugin: "com.github.johnrengelman.shadow"
+
+    version = mod_version
+    group = mod_group_id
+
+    base {
+        archivesName = project.name
+    }
+
+    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+    println "Java: ${System.getProperty("java.version")}, JVM: ${System.getProperty("java.vm.version")} (${System.getProperty("java.vendor")}), Arch: ${System.getProperty("os.arch")}"
+
+    minecraft {
+        mappings channel: mapping_channel, version: mapping_version
+        copyIdeResources = true
+
+        runs {
+            configureEach {
+                workingDirectory project.file("run")
+                property "forge.logging.markers", "REGISTRIES"
+                property "forge.logging.console.level", "debug"
+
+                // ---- Shared dev-run classpath injection (bc_core embedded deps, e.g. SnakeYAML) ----
+                // Only apply if bc_core exists AND it defines an 'embed' configuration.
+                if (rootProject.findProject(":bc_core") != null &&
+                        rootProject.project(":bc_core").configurations.findByName("embed") != null) {
+
+                    lazyToken("minecraft_classpath") {
+                        rootProject.project(":bc_core")
+                                .configurations
+                                .embed
+                                .copyRecursive()
+                                .resolve()
+                                .collect { it.absolutePath }
+                                .join(File.pathSeparator)
+                    }
+                }
+                // ----------------------------------------------------------------------------------
+            }
+
+            client {
+                workingDirectory project.file("run")
+                property "forge.enabledGameTestNamespaces", project.name
+            }
+
+            server {
+                workingDirectory project.file("run")
+                property "forge.enabledGameTestNamespaces", project.name
+                args "--nogui"
+            }
+
+            data {
+                workingDirectory project.file("run-data")
+                args "--mod", project.name,
+                        "--all",
+                        "--existing", file("src/main/resources/")
+            }
+        }
+    }
+
+    sourceSets.main.resources { srcDir "src/generated/resources" }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    }
+
+    tasks.named("jar", Jar).configure {
+        manifest {
+            attributes([
+                    "Specification-Title"     : project.name,
+                    "Specification-Vendor"    : mod_authors,
+                    "Specification-Version"   : "1",
+                    "Implementation-Title"    : project.name,
+                    "Implementation-Version"  : project.version,
+                    "Implementation-Vendor"   : mod_authors,
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            ])
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = "UTF-8"
+    }
+
+    publishing {
+        publications {
+            register("mavenJava", MavenPublication) {
+                artifact jar
+            }
+        }
+        repositories {
+            maven {
+                url "file://${rootProject.projectDir}/mcmodsrepo"
+            }
+        }
+    }
+}

@@ -1,0 +1,91 @@
+// bc_core subproject build configuration
+
+configurations {
+    embed
+    implementation.extendsFrom(embed)
+}
+
+minecraft {
+    runs {
+        configureEach {
+            mods {
+                bc_core {
+                    source sourceSets.main
+                }
+            }
+
+            //Add SnakeYAML to classpath for dev runs
+            lazyToken('minecraft_classpath') {
+                configurations.embed.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
+            }
+        }
+
+        client {
+            workingDirectory project.file('run')
+            property 'forge.enabledGameTestNamespaces', 'bc_core'
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'forge.enabledGameTestNamespaces', 'bc_core'
+        }
+
+        data {
+            args '--mod', 'bc_core', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://cursemaven.com/"
+        content { includeGroup "curse.maven" }
+    }
+}
+
+dependencies {
+    embed 'org.yaml:snakeyaml:2.2'
+
+    // Dyenamics 1.20.1-3.2.0 (Forge, Java 17 compatible)
+    implementation fg.deobf("curse.maven:dyenamics-509276:5353528")
+
+}
+
+shadowJar {
+    configurations = [project.configurations.embed]
+    archiveClassifier.set('')
+    relocate 'org.yaml.snakeyaml', 'com.builderscompanion.shaded.snakeyaml'
+}
+
+reobf {
+    shadowJar {}
+}
+
+tasks.named('jar').configure {
+    dependsOn shadowJar
+    enabled = false
+}
+
+tasks.named('build').configure {
+    dependsOn reobfShadowJar
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version: forge_version, forge_version_range: forge_version_range,
+            loader_version_range: loader_version_range,
+            mod_id: 'bc_core',
+            mod_name: 'Builders Companion Core',
+            mod_license: mod_license,
+            mod_version: mod_version,
+            mod_authors: mod_authors,
+            mod_description: 'Core module for Builders Companion mod'
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}

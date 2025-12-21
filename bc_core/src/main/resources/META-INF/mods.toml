@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="bc_core"
+version="${mod_version}"
+displayName="Builders Companion Core"
+description='''${mod_description}'''
+authors="${mod_authors}"
+
+[[dependencies.bc_core]]
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.bc_core]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.bc_core]]
+modId="dyenamics"
+mandatory=false
+versionRange="[1.20.1-3.2.0,)"
+ordering="AFTER"
+side="BOTH"

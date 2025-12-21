@@ -1,0 +1,1036 @@
+{
+  "values": [
+    {
+      "id": "bc_core:tinted_water_still_000",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_000",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_001",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_001",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_002",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_002",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_003",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_003",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_004",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_004",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_005",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_005",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_006",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_006",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_007",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_007",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_008",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_008",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_009",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_009",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_010",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_010",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_011",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_011",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_012",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_012",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_013",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_013",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_014",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_014",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_015",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_015",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_016",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_016",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_017",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_017",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_018",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_018",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_019",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_019",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_020",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_020",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_021",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_021",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_022",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_022",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_023",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_023",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_024",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_024",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_025",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_025",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_026",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_026",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_027",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_027",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_028",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_028",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_029",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_029",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_030",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_030",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_031",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_031",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_032",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_032",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_033",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_033",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_034",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_034",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_035",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_035",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_036",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_036",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_037",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_037",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_038",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_038",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_039",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_039",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_040",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_040",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_041",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_041",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_042",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_042",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_043",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_043",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_044",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_044",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_045",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_045",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_046",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_046",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_047",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_047",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_048",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_048",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_049",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_049",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_050",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_050",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_051",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_051",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_052",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_052",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_053",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_053",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_054",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_054",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_055",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_055",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_056",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_056",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_057",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_057",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_058",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_058",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_059",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_059",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_060",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_060",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_061",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_061",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_062",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_062",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_063",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_063",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_064",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_064",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_065",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_065",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_066",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_066",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_067",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_067",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_068",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_068",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_069",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_069",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_070",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_070",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_071",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_071",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_072",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_072",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_073",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_073",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_074",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_074",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_075",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_075",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_076",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_076",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_077",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_077",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_078",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_078",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_079",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_079",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_080",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_080",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_081",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_081",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_082",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_082",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_083",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_083",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_084",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_084",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_085",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_085",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_086",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_086",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_087",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_087",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_088",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_088",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_089",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_089",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_090",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_090",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_091",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_091",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_092",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_092",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_093",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_093",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_094",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_094",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_095",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_095",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_096",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_096",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_097",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_097",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_098",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_098",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_099",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_099",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_100",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_100",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_101",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_101",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_102",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_102",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_103",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_103",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_104",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_104",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_105",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_105",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_106",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_106",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_107",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_107",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_108",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_108",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_109",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_109",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_110",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_110",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_111",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_111",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_112",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_112",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_113",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_113",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_114",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_114",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_115",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_115",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_116",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_116",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_117",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_117",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_118",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_118",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_119",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_119",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_120",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_120",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_121",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_121",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_122",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_122",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_123",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_123",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_124",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_124",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_125",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_125",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_126",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_126",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_127",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_127",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_still_128",
+      "required": false
+    },
+    {
+      "id": "bc_core:tinted_water_flowing_128",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="bc_additions"
+version="1.0.0"
+displayName="Builders Companion: Additions"
+description='''
+Adds small stand alone changes that don't fit elsewhere and will grow.
+Currently adds: Rose Quartz Geode for Biomes O' Plenty.
+'''
+logoFile="logo.png"
+credits="Part of the Builders Companion mod suite"
+authors="Judicius"
+
+[[dependencies.bc_bd_additions]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.bc_bd_additions]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.bc_bd_additions]]
+modId="biomesoplenty"
+mandatory=false
+versionRange="[18.0.0,)"
+ordering="AFTER"
+side="BOTH"

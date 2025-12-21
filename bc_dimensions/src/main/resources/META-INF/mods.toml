@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="bc_dimensions"
+version="${mod_version}"
+displayName="Builders Companion: Dimensions"
+description='''${mod_description}'''
+authors="${mod_authors}"
+
+[[dependencies.bc_dimensions]]
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.bc_dimensions]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.bc_dimensions]]
+    modId="bc_core"
+    mandatory=true
+    versionRange="${mod_version}"
+    ordering="AFTER"
+    side="BOTH"

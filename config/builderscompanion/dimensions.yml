@@ -1,0 +1,17 @@
+# ============================================
+# BUILDERS COMPANION: DIMENSIONS
+# Main Configuration File
+# ============================================
+
+# List of enabled dimensions
+# Comment out dimensions you don't want to load
+enabled_dimensions:
+  - example_dimension
+  # - avalon
+  # - terra
+
+# Include global settings
+include_global_config: true
+
+# Where to find individual dimension configs
+dimension_config_directory: "config/builderscompanion/dimensions"

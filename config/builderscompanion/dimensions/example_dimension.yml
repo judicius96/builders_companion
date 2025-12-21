@@ -1,0 +1,128 @@
+# ============================================
+# DIMENSION: Example Dimension
+# ============================================
+# This is a minimal example configuration demonstrating
+# the basics of creating a custom dimension.
+
+# Display name (used in UI, commands, messages)
+display_name: "Example Dimension"
+
+# ============================================
+# PORTAL CONFIGURATION
+# ============================================
+portal:
+  # Frame block (must be a valid block ID)
+  frame_block: "minecraft:stone"
+
+  # Ignition item (what lights the portal)
+  ignition_item: "minecraft:flint_and_steel"
+
+  # Portal coordinate scaling
+  portal_offset: 1
+  # 1   = 1:1 mapping with overworld
+  # 8   = nether-style (1 block here = 8 in overworld)
+  # -8  = reverse nether (8 blocks here = 1 in overworld)
+
+  # Portal linking mode
+  link_mode: "coordinate"  # "coordinate" or "spawn"
+
+  # Optional: Custom portal effects
+  ambient_sound: "minecraft:block.portal.ambient"
+  travel_sound: "minecraft:block.portal.travel"
+  particle_color: "#8B00FF"  # Hex color code
+
+# ============================================
+# WORLD BORDER
+# ============================================
+world_border:
+  center_x: 0
+  center_z: 0
+  radius: 5000              # Chunks
+  damage_per_block: 0.2
+  warning_distance: 100
+  warning_time: 15
+
+# ============================================
+# BIOME CONFIGURATION
+# ============================================
+biomes:
+  # ==========================================
+  # GENERATION MODE
+  # ==========================================
+  mode: "region"  # Options: "region", "climate_grid", "layered"
+
+  # ==========================================
+  # REGION MODE CONFIGURATION
+  # ==========================================
+
+  # Include vanilla biomes
+  include_vanilla: true
+  vanilla_dimension: "overworld"  # "overworld", "nether", or "end"
+
+  # Include mod biomes (examples - uncomment if you have these mods)
+  include_mods:
+    # - "biomesoplenty:*"         # All BOP biomes
+    # - "terralith:*"             # All Terralith biomes
+
+  # Exclude specific biomes
+  exclude_biomes: []
+
+  # Override individual biome weights
+  weight_overrides:
+    "minecraft:plains": 50    # Make plains very common
+
+  # Generate transparency reports
+  generate_region_report: true
+  generate_biome_weights: true
+
+# ============================================
+# WORLD GENERATION
+# ============================================
+world_generation:
+  # Dimension type (affects generation mechanics)
+  dimension_type: "overworld"  # "overworld", "nether", "end", "custom"
+
+  # Seed configuration
+  seed:
+    mirror_overworld: false
+    mirror_dimension: null
+    custom_seed: null  # null = random
+
+  # Ambient settings
+  ambient_light: 1.0  # 0.0 = dark, 1.0 = normal
+
+# ============================================
+# STRUCTURES
+# ============================================
+structures:
+  # Only allow structures from mods with biomes in this dimension
+  limit_to_parent_mods: true
+
+  # Whitelist structures
+  include_structures:
+    - "minecraft:village"
+    - "minecraft:ruined_portal"
+
+  # Blacklist structures
+  exclude_structures: []
+
+# ============================================
+# PLACED FEATURES
+# ============================================
+placed_features:
+  limit_to_parent_mods: true
+
+  # Density multipliers
+  density:
+    trees: 1.0
+    flowers: 1.0
+    grass: 1.0
+    ores: 1.0
+    mushrooms: 1.0
+    structures: 1.0
+
+# ============================================
+# MOB SPAWNING
+# ============================================
+mob_spawning:
+  inherit_from_biomes: true

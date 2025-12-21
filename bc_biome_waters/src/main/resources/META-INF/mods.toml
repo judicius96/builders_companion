@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="bc_biome_waters"
+version="${mod_version}"
+displayName="Builders Companion Biome Waters"
+description='''${mod_description}'''
+authors="${mod_authors}"
+
+[[dependencies.bc_biome_waters]]
+modId="forge"
+mandatory=true
+versionRange="${forge_version_range}"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.bc_biome_waters]]
+modId="minecraft"
+mandatory=true
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"

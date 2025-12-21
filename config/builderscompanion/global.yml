@@ -1,0 +1,33 @@
+# ============================================
+# GLOBAL SETTINGS
+# ============================================
+
+# Performance & Safety
+max_dimensions: 10              # Hard limit on custom dimensions
+chunk_load_radius: 8            # Chunks kept loaded around portals
+
+# Default World Border (applied unless dimension overrides)
+default_world_border:
+  center_x: 0
+  center_z: 0
+  radius: 10000                 # Chunks (160,000 blocks)
+  damage_per_block: 0.2
+  warning_distance: 100         # Blocks from border
+  warning_time: 15              # Seconds
+
+# Portal Defaults
+default_portal_offset: 1        # 1:1 coords, 8 = nether-style
+
+# Cave System Defaults
+default_carver: "minecraft:default"
+
+# Debugging
+debug_mode: false
+log_dimension_creation: true
+log_biome_placement: false
+log_region_competition: false
+
+# Auto-Generation Settings
+generate_region_reports: true
+generate_biome_weight_reports: true
+generate_distribution_reports: true

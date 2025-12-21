@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "bc_bd_additions:block/budding_rose_quartz"
+  }
+}
