@@ -3,8 +3,9 @@
  *
  * Copyright (c) 2025 Builders Companion
  */
-package com.builderscompanion.core.util;
+package com.builderscompanion.core.datagen;
 
+import com.builderscompanion.core.util.BCLogger;
 import cy.jdkdigital.dyenamics.common.items.DyenamicDyeItem;
 import cy.jdkdigital.dyenamics.core.util.DyenamicDyeColor;
 import net.minecraft.world.item.DyeColor;

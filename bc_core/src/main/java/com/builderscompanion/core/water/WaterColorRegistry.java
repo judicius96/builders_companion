@@ -14,9 +14,12 @@ import java.util.*;
  */
 public class WaterColorRegistry {
 
-    private static final Map<String, Integer> biomeColors = new HashMap<>();
-    private static final Map<String, Integer> dyeColors = new HashMap<>();
+    private static final Map<String, Integer> biomeColors = new LinkedHashMap<>();
+    private static final Map<String, Integer> dyeColors = new LinkedHashMap<>();
     private static final Map<Integer, ColorEntry> uniqueColors = new LinkedHashMap<>();
+
+    // NEW: primary/canonical biome display name for a given rgb
+    private static final Map<Integer, String> primaryBiomeForColor = new LinkedHashMap<>();
 
     private static boolean loaded = false;
 
@@ -25,6 +28,12 @@ public class WaterColorRegistry {
      */
     public static void loadFromClasspath() {
         if (loaded) return;
+
+        // If you ever remove the loaded-guard for hot reload, these clears matter.
+        biomeColors.clear();
+        dyeColors.clear();
+        uniqueColors.clear();
+        primaryBiomeForColor.clear();
 
         String resourcePath = "/data/bccore/water_colors/registered_colors.txt";
         InputStream stream = WaterColorRegistry.class.getResourceAsStream(resourcePath);
@@ -79,9 +88,13 @@ public class WaterColorRegistry {
                     continue;
                 }
 
-                // Store in category map
+                // Store in category map + PRIMARY biome selection (biome only)
                 if (category.equals("biome")) {
                     biomeColors.put(sourceId, color);
+
+                    // Track PRIMARY biome display name for this color (first biome encountered)
+                    primaryBiomeForColor.putIfAbsent(color, formatBiomeName(extractPath(sourceId)));
+
                 } else if (category.equals("dye")) {
                     dyeColors.put(sourceId, color);
                 }
@@ -108,6 +121,7 @@ public class WaterColorRegistry {
         } catch (IOException e) {
             BCLogger.error("Failed to load water color registry: {}", e.getMessage());
         }
+
         BCLogger.info("Unique colors breakdown:");
         for (ColorEntry entry : uniqueColors.values()) {
             BCLogger.info("  typeId={} rgb=0x{} category={}",
@@ -116,29 +130,25 @@ public class WaterColorRegistry {
     }
 
     /**
-     * Get color for a biome
+     * Get primary/canonical biome display name for a color.
+     * Used for deterministic bucket naming.
      */
+    public static String getPrimaryBiomeForColor(int rgb) {
+        return primaryBiomeForColor.get(rgb);
+    }
+
     public static Integer getBiomeColor(String biomeId) {
         return biomeColors.get(biomeId);
     }
 
-    /**
-     * Get color for a dye
-     */
     public static Integer getDyeColor(String dyeId) {
         return dyeColors.get(dyeId);
     }
 
-    /**
-     * Get all unique colors for fluid registration
-     */
     public static List<ColorEntry> getUniqueColors() {
         return new ArrayList<>(uniqueColors.values());
     }
 
-    /**
-     * Color entry for fluid registration
-     */
     public static class ColorEntry {
         public final int typeId;
         public final int rgb;
@@ -158,25 +168,28 @@ public class WaterColorRegistry {
         List<String> result = new ArrayList<>();
 
         for (Map.Entry<String, Integer> entry : biomeColors.entrySet()) {
-            if (entry.getValue() == rgb) {
-                // Format: minecraft:swamp -> Swamp
-                String biomeName = entry.getKey().contains(":")
-                        ? entry.getKey().split(":")[1]
-                        : entry.getKey();
-                result.add(formatBiomeName(biomeName));
+            Integer v = entry.getValue();
+            if (v != null && v == rgb) {
+                result.add(formatBiomeName(extractPath(entry.getKey())));
             }
         }
-
         return result;
+    }
+
+    private static String extractPath(String id) {
+        // "minecraft:swamp" -> "swamp"
+        int idx = id.indexOf(':');
+        return (idx >= 0 && idx + 1 < id.length()) ? id.substring(idx + 1) : id;
     }
 
     private static String formatBiomeName(String name) {
         String[] words = name.split("_");
         StringBuilder builder = new StringBuilder();
         for (String word : words) {
+            if (word.isEmpty()) continue;
             if (builder.length() > 0) builder.append(" ");
-            builder.append(word.substring(0, 1).toUpperCase());
-            builder.append(word.substring(1));
+            builder.append(Character.toUpperCase(word.charAt(0)));
+            if (word.length() > 1) builder.append(word.substring(1));
         }
         return builder.toString();
     }

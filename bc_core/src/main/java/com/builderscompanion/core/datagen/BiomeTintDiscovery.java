@@ -3,13 +3,11 @@
  *
  * Copyright (c) 2025 Builders Companion
  */
-package com.builderscompanion.core.util;
+package com.builderscompanion.core.datagen;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
+import com.builderscompanion.core.util.BCLogger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.core.registries.Registries;
 
@@ -17,7 +15,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

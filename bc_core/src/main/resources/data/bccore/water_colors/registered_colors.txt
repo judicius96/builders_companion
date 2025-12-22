@@ -18,20 +18,36 @@
 # BIOME WATER COLORS (468 entries)
 # ============================================================================
 
+alexscaves:abyssal_chasm | 0x00154B | biome
+alexscaves:primordial_caves | 0x05A599 | biome
+minecraft:meadow | 0x0E4ECF | biome
+regions_unexplored:alpha_grove | 0x1C58DD | biome
+biomesoplenty:origin_valley | 0x2032FF | biome
+biomesoplenty:wetland | 0x272179 | biome
+regions_unexplored:blackwood_taiga | 0x2F6DA2 | biome
+biomesoplenty:ominous_woods | 0x312346 | biome
+yungscavebiomes:lost_caves | 0x332C0A | biome
+regions_unexplored:ancient_delta | 0x33FFFF | biome
+regions_unexplored:infernal_holt | 0x35180D | biome
+regions_unexplored:rocky_reef | 0x35BCD6 | biome
+biomesoplenty:auroral_garden | 0x3938C9 | biome
+regions_unexplored:hyacinth_deeps | 0x3986C9 | biome
+minecraft:mangrove_swamp | 0x3A7A6A | biome
+minecraft:cold_ocean | 0x3D57D6 | biome
+regions_unexplored:muddy_river | 0x3F6FB4 | biome
+minecraft:warm_ocean | 0x43D5EE | biome
+abyssal_descent:lunar_forest | 0x3F76E4 | biome
 abyssal_descent:abyss_cliffs | 0x3F76E4 | biome
 abyssal_descent:abyssal_plains | 0x3F76E4 | biome
 abyssal_descent:core_depths | 0x3F76E4 | biome
 abyssal_descent:deeplight | 0x3F76E4 | biome
-abyssal_descent:lunar_forest | 0x3F76E4 | biome
 aether:skyroot_forest | 0x3F76E4 | biome
 aether:skyroot_grove | 0x3F76E4 | biome
 aether:skyroot_meadow | 0x3F76E4 | biome
 aether:skyroot_woodland | 0x3F76E4 | biome
-alexscaves:abyssal_chasm | 0x00154B | biome
 alexscaves:candy_cavity | 0xFA49F8 | biome
 alexscaves:forlorn_hollows | 0x5D6A84 | biome
 alexscaves:magnetic_caves | 0x606FC1 | biome
-alexscaves:primordial_caves | 0x05A599 | biome
 alexscaves:toxic_caves | 0x4B7272 | biome
 aquaticcraft:aq_abyssal_depths | 0x191032 | biome
 aquaticcraft:aq_algid_brine | 0x006AFF | biome
@@ -149,7 +165,6 @@ biomesoplenty:muskeg | 0x3F76E4 | biome
 biomesoplenty:mystic_grove | 0x9C3FE4 | biome
 biomesoplenty:old_growth_dead_forest | 0x3F76E4 | biome
 biomesoplenty:old_growth_woodland | 0x3F76E4 | biome
-biomesoplenty:ominous_woods | 0x312346 | biome
 biomesoplenty:orchard | 0x3F76E4 | biome
 biomesoplenty:origin_valley | 0x2032FF | biome
 biomesoplenty:overgrown_greens | 0x3F76E4 | biome
@@ -176,7 +191,6 @@ biomesoplenty:volcanic_plains | 0x45ADF2 | biome
 biomesoplenty:volcano | 0x45ADF2 | biome
 biomesoplenty:wasteland | 0x433721 | biome
 biomesoplenty:wasteland_steppe | 0x405682 | biome
-biomesoplenty:wetland | 0x272179 | biome
 biomesoplenty:wintry_origin_valley | 0x2032FF | biome
 biomesoplenty:withered_abyss | 0x3F76E4 | biome
 biomesoplenty:woodland | 0x3F76E4 | biome
@@ -280,7 +294,6 @@ minecraft:basalt_deltas | 0x3F76E4 | biome
 minecraft:beach | 0x3F76E4 | biome
 minecraft:birch_forest | 0x3F76E4 | biome
 minecraft:cherry_grove | 0x5DB7EF | biome
-minecraft:cold_ocean | 0x3D57D6 | biome
 minecraft:crimson_forest | 0x3F76E4 | biome
 minecraft:dark_forest | 0x3F76E4 | biome
 minecraft:deep_cold_ocean | 0x3D57D6 | biome
@@ -305,7 +318,6 @@ minecraft:jagged_peaks | 0x3F76E4 | biome
 minecraft:jungle | 0x3F76E4 | biome
 minecraft:lukewarm_ocean | 0x45ADF2 | biome
 minecraft:lush_caves | 0x3F76E4 | biome
-minecraft:mangrove_swamp | 0x3A7A6A | biome
 minecraft:meadow | 0x0E4ECF | biome
 minecraft:mushroom_fields | 0x3F76E4 | biome
 minecraft:nether_wastes | 0x3F76E4 | biome
@@ -332,7 +344,6 @@ minecraft:swamp | 0x4C6559 | biome
 minecraft:taiga | 0x3F76E4 | biome
 minecraft:the_end | 0x3F76E4 | biome
 minecraft:the_void | 0x3F76E4 | biome
-minecraft:warm_ocean | 0x43D5EE | biome
 minecraft:warped_forest | 0x3F76E4 | biome
 minecraft:windswept_forest | 0x3F76E4 | biome
 minecraft:windswept_gravelly_hills | 0x3F76E4 | biome
@@ -347,7 +358,6 @@ outer_end:azure_forest | 0x3F76E4 | biome
 outer_end:crystal_crag | 0x3F76E4 | biome
 outer_end:primordial_pools | 0x3F76E4 | biome
 quark:glimmering_weald | 0x3F76E4 | biome
-regions_unexplored:alpha_grove | 0x1C58DD | biome
 regions_unexplored:ancient_delta | 0x33FFFF | biome
 regions_unexplored:arid_mountains | 0x3F76E4 | biome
 regions_unexplored:ashen_woodland | 0x664938 | biome
@@ -358,7 +368,6 @@ regions_unexplored:barley_fields | 0x3F76E4 | biome
 regions_unexplored:bayou | 0x437C4A | biome
 regions_unexplored:bioshroom_caves | 0x3F76E4 | biome
 regions_unexplored:blackstone_basin | 0x535BF3 | biome
-regions_unexplored:blackwood_taiga | 0x2F6DA2 | biome
 regions_unexplored:boreal_taiga | 0x3F6FB4 | biome
 regions_unexplored:chalk_cliffs | 0x3F76E4 | biome
 regions_unexplored:clover_plains | 0x3F76E4 | biome
@@ -381,14 +390,12 @@ regions_unexplored:gravel_beach | 0x3F76E4 | biome
 regions_unexplored:highland_fields | 0x3F76E4 | biome
 regions_unexplored:hyacinth_deeps | 0x3986C9 | biome
 regions_unexplored:icy_heights | 0x3F76E4 | biome
-regions_unexplored:infernal_holt | 0x35180D | biome
 regions_unexplored:joshua_desert | 0x3F76E4 | biome
 regions_unexplored:magnolia_woodland | 0x3F76E4 | biome
 regions_unexplored:maple_forest | 0x3F76E4 | biome
 regions_unexplored:marsh | 0x477BB7 | biome
 regions_unexplored:mauve_hills | 0x54A179 | biome
 regions_unexplored:mountains | 0x3F76E4 | biome
-regions_unexplored:muddy_river | 0x3F6FB4 | biome
 regions_unexplored:mycotoxic_undergrowth | 0xA38B24 | biome
 regions_unexplored:old_growth_bayou | 0x437C4A | biome
 regions_unexplored:orchard | 0x3F76E4 | biome
@@ -404,7 +411,6 @@ regions_unexplored:redstone_abyss | 0xA21914 | biome
 regions_unexplored:redstone_caves | 0x3F76E4 | biome
 regions_unexplored:redwoods | 0x3F76E4 | biome
 regions_unexplored:rocky_meadow | 0x3F76E4 | biome
-regions_unexplored:rocky_reef | 0x35BCD6 | biome
 regions_unexplored:saguaro_desert | 0x3F76E4 | biome
 regions_unexplored:scorching_caves | 0x3F76E4 | biome
 regions_unexplored:shrubland | 0x3F76E4 | biome
@@ -467,7 +473,6 @@ undergarden:veil_mushroom_bog | 0x053922 | biome
 undergarden:wigglewood_forest | 0x053922 | biome
 wetland_whimsy:marsh | 0x446C84 | biome
 yungscavebiomes:frosted_caves | 0x3F76E4 | biome
-yungscavebiomes:lost_caves | 0x332C0A | biome
 
 # ============================================================================
 # DYE COLORS (34 colors: 18 Dyenamics + 16 Vanilla)

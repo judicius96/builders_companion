@@ -58,7 +58,7 @@ public final class BCTintedLiquidClientAssets implements DataProvider {
                     .resolve("assets/" + BCCore.MODID + "/blockstates/" + blockName + ".json");
 
             futures[idx++] = DataProvider.saveStable(cache, JsonParser.parseString(modelJson), modelPath);
-            futures[idx++] = DataProvider.saveStable(cache, JsonParser.parseString(modelJson), modelPath);
+            futures[idx++] = DataProvider.saveStable(cache, JsonParser.parseString(variants.toString()), blockstatePath);
         }
 
         return CompletableFuture.allOf(futures);
