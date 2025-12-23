@@ -41,6 +41,15 @@ public class TintedLiquidsRegistry {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, BCCore.MODID);
 
+    public static List<RegistryObject<ForgeFlowingFluid>> getAllStillFluids() {
+        return new ArrayList<>(stillFluidRegistry.values());
+    }
+
+    public static List<RegistryObject<ForgeFlowingFluid>> getAllFlowingFluids() {
+        return new ArrayList<>(flowingFluidRegistry.values());
+    }
+
+
     /* -------------------------------------------------------------------------
      * Internal Registries
      * ------------------------------------------------------------------------- */
@@ -63,7 +72,13 @@ public class TintedLiquidsRegistry {
      * Registration
      * ------------------------------------------------------------------------- */
 
-    private static final List<ColorRegistration> pendingRegistrations = new ArrayList<>();
+    private static final List<ColorRegistration> SUBMITTED_COLORS = new ArrayList<>();
+
+    public static List<ColorRegistration> getSubmittedColors() {
+        return List.copyOf(SUBMITTED_COLORS);
+    }
+
+    //private static final List<ColorRegistration> pendingRegistrations = new ArrayList<>();
 
     // Add this inner class
     public static class ColorRegistration {
@@ -80,6 +95,9 @@ public class TintedLiquidsRegistry {
 
     // Replace registerAll() with this:
     public static void registerColors(List<ColorRegistration> colors) {
+        SUBMITTED_COLORS.clear();
+        SUBMITTED_COLORS.addAll(colors);
+
         BCLogger.info("Registering {} tinted water variants...", colors.size());
 
         for (ColorRegistration entry : colors) {
@@ -92,7 +110,15 @@ public class TintedLiquidsRegistry {
                     "tinted_water_" + idSuffix,
                     () -> new FluidType(FluidType.Properties.create()
                             .density(1000)
-                            .viscosity(1000)) {
+                            .viscosity(1000)
+                            .canDrown(true)
+                            .canSwim(true)
+                            .supportsBoating(true)
+                            .canHydrate(true)
+                            .canExtinguish(true)
+                            .motionScale(0.014D)
+                            .fallDistanceModifier(0.0F)
+                    ) {
 
                         @Override
                         public void initializeClient(java.util.function.Consumer<IClientFluidTypeExtensions> consumer) {
