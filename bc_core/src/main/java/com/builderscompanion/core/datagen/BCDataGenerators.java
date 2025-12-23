@@ -18,6 +18,6 @@ public final class BCDataGenerators {
         ExistingFileHelper existing = event.getExistingFileHelper();
 
         gen.addProvider(event.includeServer(), new BCTintedFluidTagsProvider(output, event.getLookupProvider(), existing));
-        gen.addProvider(event.includeClient(), new BCTintedLiquidClientAssets(output));
+        // BCTintedLiquidClientAssets removed - now handled by child mods
     }
 }

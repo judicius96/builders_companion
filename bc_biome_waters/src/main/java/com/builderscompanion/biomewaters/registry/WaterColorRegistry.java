@@ -1,4 +1,4 @@
-package com.builderscompanion.core.registry;
+package com.builderscompanion.biomewaters.registry;
 
 import com.builderscompanion.core.util.BCLogger;
 
@@ -10,15 +10,14 @@ import java.util.*;
 
 /**
  * Registry for water colors from biomes and dyes.
- * Loads from classpath resource: /data/bccore/water_colors/registered_colors.txt
+ * Loads from classpath resource: /data/biome_waters/biome_colors.txt
  */
 public class WaterColorRegistry {
 
     private static final Map<String, Integer> biomeColors = new LinkedHashMap<>();
     private static final Map<String, Integer> dyeColors = new LinkedHashMap<>();
     private static final Map<Integer, ColorEntry> uniqueColors = new LinkedHashMap<>();
-
-    // NEW: primary/canonical biome display name for a given rgb
+    private static final Map<Integer, ColorEntry> entriesByTypeId = new HashMap<>();
     private static final Map<Integer, String> primaryBiomeForColor = new LinkedHashMap<>();
 
     private static boolean loaded = false;
@@ -29,13 +28,13 @@ public class WaterColorRegistry {
     public static void loadFromClasspath() {
         if (loaded) return;
 
-        // If you ever remove the loaded-guard for hot reload, these clears matter.
         biomeColors.clear();
         dyeColors.clear();
         uniqueColors.clear();
+        entriesByTypeId.clear();
         primaryBiomeForColor.clear();
 
-        String resourcePath = "/data/bccore/water_colors/registered_colors.txt";
+        String resourcePath = "/data/biome_waters/biome_colors.txt";
         InputStream stream = WaterColorRegistry.class.getResourceAsStream(resourcePath);
 
         if (stream == null) {
@@ -49,7 +48,6 @@ public class WaterColorRegistry {
             int totalEntries = 0;
             int defaultColorCount = 0;
 
-            // Skip header
             reader.readLine();
             lineNum++;
 
@@ -57,9 +55,7 @@ public class WaterColorRegistry {
                 lineNum++;
                 line = line.trim();
 
-                if (line.isEmpty() || line.startsWith("#")) {
-                    continue;
-                }
+                if (line.isEmpty() || line.startsWith("#")) continue;
 
                 String[] parts = line.split("\\|");
                 if (parts.length < 3) {
@@ -71,7 +67,6 @@ public class WaterColorRegistry {
                 String hexColor = parts[1].trim();
                 String category = parts[2].trim();
 
-                // Parse hex color
                 int color;
                 try {
                     color = Integer.parseInt(hexColor.replace("0x", ""), 16);
@@ -82,31 +77,31 @@ public class WaterColorRegistry {
 
                 totalEntries++;
 
-                // Filter out default vanilla color
                 if (color == 0x3F76E4) {
                     defaultColorCount++;
                     continue;
                 }
 
-                // Store in category map + PRIMARY biome selection (biome only)
-                if (category.equals("biome")) {
+                if ("biome".equals(category)) {
                     biomeColors.put(sourceId, color);
-
-                    // Track PRIMARY biome display name for this color (first biome encountered)
                     primaryBiomeForColor.putIfAbsent(color, formatBiomeName(extractPath(sourceId)));
-
-                } else if (category.equals("dye")) {
+                } else if ("dye".equals(category)) {
                     dyeColors.put(sourceId, color);
+                } else {
+                    BCLogger.warn("Unexpected category '{}' in biome_colors.txt on line {}", category, lineNum);
+                    continue;
                 }
 
-                // Add to unique colors map
                 if (!uniqueColors.containsKey(color)) {
                     int typeId = uniqueColors.size();
-                    uniqueColors.put(color, new ColorEntry(typeId, color, category));
-
-                    BCLogger.debug("Added unique color: typeId={}, rgb=0x{}, category={}",
-                            typeId, Integer.toHexString(color), category);
+                    ColorEntry ce = new ColorEntry(typeId, color, category);
+                    uniqueColors.put(color, ce);
                 }
+            }
+
+            // build cache ONCE
+            for (ColorEntry entry : uniqueColors.values()) {
+                entriesByTypeId.put(entry.typeId, entry);
             }
 
             loaded = true;
@@ -129,6 +124,12 @@ public class WaterColorRegistry {
         }
     }
 
+    public static ColorEntry getEntryByTypeId(int typeId) {
+        return entriesByTypeId.get(typeId);
+    }
+
+
+
     /**
      * Get primary/canonical biome display name for a color.
      * Used for deterministic bucket naming.
@@ -140,11 +141,7 @@ public class WaterColorRegistry {
     public static Integer getBiomeColor(String biomeId) {
         return biomeColors.get(biomeId);
     }
-
-    public static Integer getDyeColor(String dyeId) {
-        return dyeColors.get(dyeId);
-    }
-
+    public static Integer getDyeColor(String dyeId) { return dyeColors.get(dyeId); }
     public static List<ColorEntry> getUniqueColors() {
         return new ArrayList<>(uniqueColors.values());
     }

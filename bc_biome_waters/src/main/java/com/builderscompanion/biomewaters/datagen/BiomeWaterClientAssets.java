@@ -1,24 +1,22 @@
-package com.builderscompanion.core.datagen;
+package com.builderscompanion.biomewaters.datagen;
 
 import com.builderscompanion.core.BCCore;
-import com.builderscompanion.core.registry.WaterColorRegistry;
-import com.google.gson.JsonElement;
+import com.builderscompanion.biomewaters.registry.WaterColorRegistry;
 import com.google.gson.JsonParser;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public final class BCTintedLiquidClientAssets implements DataProvider {
+public final class BiomeWaterClientAssets implements DataProvider {
 
     private final PackOutput output;
 
-    public BCTintedLiquidClientAssets(PackOutput output) {
+    public BiomeWaterClientAssets(PackOutput output) {
         this.output = output;
     }
 
@@ -66,6 +64,6 @@ public final class BCTintedLiquidClientAssets implements DataProvider {
 
     @Override
     public String getName() {
-        return "BC Core - Tinted Liquid Client Assets (models + blockstates)";
+        return "Biome Waters - Tinted Liquid Client Assets (models + blockstates)";
     }
 }

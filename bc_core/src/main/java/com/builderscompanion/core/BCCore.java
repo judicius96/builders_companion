@@ -1,10 +1,8 @@
 package com.builderscompanion.core;
 
 import com.builderscompanion.core.client.FluidRenderSetup;
-import com.builderscompanion.core.registry.WaterColorRegistry;
 import com.builderscompanion.core.registry.tintedliquids.TintedLiquidsItems;
 import com.builderscompanion.core.registry.tintedliquids.TintedLiquidsRegistry;
-import com.builderscompanion.core.tintedliquids.TintedLiquids;
 import com.builderscompanion.core.util.BCLogger;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,21 +29,8 @@ public class BCCore {
         TintedLiquidsRegistry.FLUIDS.register(modBus);
         TintedLiquidsRegistry.BLOCKS.register(modBus);
 
-        //Load water color registry
-        BCLogger.info("Loading water color registry...");
-        WaterColorRegistry.loadFromClasspath();
-
-        // Register all fluid variants
-        TintedLiquidsRegistry.registerAll();
-
-        // Register event listeners
-        BCLogger.info("BCCore: registering TintedBucketEvents");
-        MinecraftForge.EVENT_BUS.register(com.builderscompanion.core.events.tintedliquids.TintedBucketEvents.class);
-        BCLogger.info("BCCore: registered TintedBucketEvents");
-
         // Setup events
         modBus.addListener(this::commonSetup);
-        modBus.addListener(this::onLoadComplete);
 
         // Fluid Registry
         if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -57,17 +42,7 @@ public class BCCore {
         event.enqueueWork(() -> {
             BCLogger.info("Builders Companion Core - Common Setup");
 
-            // Initialize TintedLiquids system
-            TintedLiquids.initialize();
-
             BCLogger.info("BC-Core initialization complete");
-        });
-    }
-    @SubscribeEvent
-    public void onLoadComplete(FMLLoadCompleteEvent event) {
-        event.enqueueWork(() -> {
-            BCLogger.info("Load complete, populating fluid arrays...");
-            TintedLiquidsRegistry.populateArrays();
         });
     }
 

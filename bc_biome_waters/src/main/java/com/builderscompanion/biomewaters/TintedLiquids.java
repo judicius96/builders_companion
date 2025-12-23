@@ -1,6 +1,6 @@
-package com.builderscompanion.core.tintedliquids;
+package com.builderscompanion.biomewaters;
 
-import com.builderscompanion.core.registry.WaterColorRegistry;
+import com.builderscompanion.biomewaters.registry.WaterColorRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;

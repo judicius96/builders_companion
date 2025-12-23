@@ -1,6 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:item/water_bucket"
+    "layer0": "minecraft:item/water_bucket",
+    "layer1": "biome_waters:item/tinted_bucket_liquid"
   }
 }

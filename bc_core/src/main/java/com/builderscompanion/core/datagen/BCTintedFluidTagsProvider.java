@@ -1,15 +1,19 @@
 package com.builderscompanion.core.datagen;
 
 import com.builderscompanion.core.BCCore;
-import com.builderscompanion.core.registry.WaterColorRegistry;
+import com.builderscompanion.core.registry.tintedliquids.TintedLiquidsRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.FluidTagsProvider;
+import net.minecraft.data.tags.TagsProvider.TagAppender;  // ← ADD THIS
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.material.Fluid;  // ← ADD THIS
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.List;
+import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class BCTintedFluidTagsProvider extends FluidTagsProvider {
@@ -24,16 +28,21 @@ public class BCTintedFluidTagsProvider extends FluidTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        // Add ALL tinted variants to minecraft:water so the solver treats them as one family.
-        var water = this.tag(FluidTags.WATER);
+        TagAppender<Fluid> waterTag = tag(FluidTags.WATER);
 
-        List<WaterColorRegistry.ColorEntry> colors = WaterColorRegistry.getUniqueColors();
-        for (WaterColorRegistry.ColorEntry entry : colors) {
-            int typeId = entry.typeId;
-            String idSuffix = String.format("%03d", typeId);
-
-            water.addOptional(new ResourceLocation(BCCore.MODID, "tinted_water_still_" + idSuffix));
-            water.addOptional(new ResourceLocation(BCCore.MODID, "tinted_water_flowing_" + idSuffix));
+        // Tag all registered tinted waters (0-255 range)
+        for (int i = 0; i < 256; i++) {
+            if (TintedLiquidsRegistry.STILL_FLUIDS[i] != null) {
+                String idSuffix = String.format("%03d", i);
+                waterTag.add(
+                        ResourceKey.create(ForgeRegistries.FLUIDS.getRegistryKey(),
+                                new ResourceLocation(BCCore.MODID, "tinted_water_still_" + idSuffix))
+                );
+                waterTag.add(
+                        ResourceKey.create(ForgeRegistries.FLUIDS.getRegistryKey(),
+                                new ResourceLocation(BCCore.MODID, "tinted_water_flowing_" + idSuffix))
+                );
+            }
         }
     }
 }
