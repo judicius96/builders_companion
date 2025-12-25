@@ -3,7 +3,7 @@ package com.builderscompanion.biomewaters.events;
 import com.builderscompanion.biomewaters.TintedLiquids;
 import com.builderscompanion.core.registry.tintedliquids.TintedLiquidsItems;
 import com.builderscompanion.core.registry.tintedliquids.TintedLiquidsRegistry;
-import com.builderscompanion.core.tintedliquids.item.TintedWaterBucketItem;
+import com.builderscompanion.core.item.tintedliquids.TintedWaterBucketItem;
 import com.builderscompanion.core.util.BCLogger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

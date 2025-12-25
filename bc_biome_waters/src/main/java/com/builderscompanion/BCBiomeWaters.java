@@ -9,7 +9,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.ArrayList;
@@ -47,9 +46,8 @@ public class BCBiomeWaters {
         // Register bucket fill events
         MinecraftForge.EVENT_BUS.register(com.builderscompanion.biomewaters.events.TintedBucketEvents.class);
 
-        // Setup lifecycle events (safe here)
+        // Setup lifecycle events
         modBus.addListener(this::commonSetup);
-        modBus.addListener(this::onLoadComplete);
 
         BCLogger.info("Biome Waters initialized");
     }
@@ -58,17 +56,10 @@ public class BCBiomeWaters {
         event.enqueueWork(() -> {
             BCLogger.info("Biome Waters - Common Setup");
 
-            // Safe: non-registry initialization only
+            // Initialize TintedLiquids system
             TintedLiquids.initialize();
 
             BCLogger.info("Biome Waters common setup complete");
-        });
-    }
-
-    private void onLoadComplete(final FMLLoadCompleteEvent event) {
-        event.enqueueWork(() -> {
-            BCLogger.info("Biome Waters: Load complete, populating fluid arrays...");
-            TintedLiquidsRegistry.populateArrays();
         });
     }
 }

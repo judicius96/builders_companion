@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 
 [[mods]]
-modId="bc_additions"
+modId="bc_bd_additions"
 version="1.0.0"
 displayName="Builders Companion: Additions"
 description='''

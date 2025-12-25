@@ -1,7 +1,7 @@
 package com.builderscompanion.core.registry.tintedliquids;
 
 import com.builderscompanion.core.BCCore;
-import com.builderscompanion.core.tintedliquids.item.TintedWaterBucketItem;
+import com.builderscompanion.core.item.tintedliquids.TintedWaterBucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.DeferredRegister;

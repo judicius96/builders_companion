@@ -1,0 +1,38 @@
+# ============================================================================
+# DYE COLORS (34 colors: 18 Dyenamics + 16 Vanilla)
+# ============================================================================
+
+dyenamics:amber_dye | 0xD37319 | dye
+dyenamics:aquamarine_dye | 0x2C7D7F | dye
+dyenamics:bubblegum_dye | 0xF771C6 | dye
+dyenamics:cherenkov_dye | 0x0198CF | dye
+dyenamics:conifer_dye | 0xBADA55 | dye
+dyenamics:fluorescent_dye | 0xEEE9B6 | dye
+dyenamics:honey_dye | 0xFFB446 | dye
+dyenamics:icy_blue_dye | 0x9EEAFF | dye
+dyenamics:lavender_dye | 0xDD99FF | dye
+dyenamics:maroon_dye | 0x910000 | dye
+dyenamics:mint_dye | 0x89E8B8 | dye
+dyenamics:navy_dye | 0x1C2871 | dye
+dyenamics:peach_dye | 0xBF9873 | dye
+dyenamics:persimmon_dye | 0xD24119 | dye
+dyenamics:rose_dye | 0xFF2865 | dye
+dyenamics:spring_green_dye | 0xC3FF99 | dye
+dyenamics:ultramarine_dye | 0x5649FF | dye
+dyenamics:wine_dye | 0x721E5B | dye
+minecraft:black_dye | 0x1E1B1B | dye
+minecraft:blue_dye | 0x253192 | dye
+minecraft:brown_dye | 0x51301A | dye
+minecraft:cyan_dye | 0x287697 | dye
+minecraft:gray_dye | 0x434343 | dye
+minecraft:green_dye | 0x3B511A | dye
+minecraft:light_blue_dye | 0x6689D3 | dye
+minecraft:light_gray_dye | 0xABABAB | dye
+minecraft:lime_dye | 0x41CD34 | dye
+minecraft:magenta_dye | 0xC354CD | dye
+minecraft:orange_dye | 0xEB8844 | dye
+minecraft:pink_dye | 0xD88198 | dye
+minecraft:purple_dye | 0x7B2FBE | dye
+minecraft:red_dye | 0xB3312C | dye
+minecraft:white_dye | 0xF0F0F0 | dye
+minecraft:yellow_dye | 0xDECF2A | dye

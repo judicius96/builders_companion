@@ -1,4 +1,4 @@
-package com.builderscompanion.core.tintedliquids.item;
+package com.builderscompanion.core.item.tintedliquids;
 
 import com.builderscompanion.core.api.TintedLiquidProviderRegistry;
 import com.builderscompanion.core.registry.tintedliquids.TintedLiquidsRegistry;
@@ -23,6 +23,9 @@ import net.minecraft.world.phys.HitResult;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static com.builderscompanion.core.registry.tintedliquids.TintedIdRanges.DYE_START;
+import static com.builderscompanion.core.registry.tintedliquids.TintedIdRanges.MAX_TYPE_ID;
+
 public class TintedWaterBucketItem extends BucketItem {
 
     public TintedWaterBucketItem(Properties props) {
@@ -30,29 +33,54 @@ public class TintedWaterBucketItem extends BucketItem {
     }
 
     @Override
-    public Component getName(ItemStack stack) {
-        int typeId = getTypeId(stack);
-        if (typeId < 0 || typeId >= 256) {
+    public Component getName(ItemStack stack){
+        //check for JEI display marker
+        if (stack.hasTag() && stack.getTag().contains("DisplayRecipe", 8)) {
+            String variant = stack.getTag().getString("DisplayRecipe");
+            return Component.literal(variant + " Water Bucket");
+        }
+
+        // 2️⃣ Normal runtime naming
+        int rawTypeId = getTypeId(stack);
+        if (!isValidTypeId(rawTypeId)) {
             return Component.literal("Tinted Water Bucket");
         }
 
-        // Delegate to provider
-        Component name = TintedLiquidProviderRegistry.getDisplayName(typeId);
-        return name != null ? name : Component.literal("Tinted Water Bucket");
+        // Normalize dye variants back to the base dye id for naming
+        int baseTypeId = normalizeForNaming(rawTypeId);
+
+        Component baseName = TintedLiquidProviderRegistry.getDisplayName(baseTypeId);
+        if (baseName == null) {
+            return Component.literal("Tinted Water Bucket");
+        }
+
+        // Optional suffix so the four states actually read differently in-game
+        String suffix = variantSuffix(rawTypeId);
+        return suffix.isEmpty() ? baseName : Component.literal(baseName.getString() + suffix);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level,
                                 List<Component> tooltip, TooltipFlag flag) {
-        int typeId = getTypeId(stack);
-        if (typeId < 0 || typeId >= 256) {
+        int rawTypeId = getTypeId(stack);
+        if (!isValidTypeId(rawTypeId)) {
             super.appendHoverText(stack, level, tooltip, flag);
             return;
         }
 
-        // Delegate to provider
-        List<Component> lines = TintedLiquidProviderRegistry.getTooltipLines(typeId);
-        tooltip.addAll(lines);
+        int baseTypeId = normalizeForNaming(rawTypeId);
+
+        // Delegate to provider using base id (so you get the correct dye/biome name)
+        List<Component> lines = TintedLiquidProviderRegistry.getTooltipLines(baseTypeId);
+        if (lines != null && !lines.isEmpty()) {
+            tooltip.addAll(lines);
+        }
+
+        // Add a simple state line so players can tell which variant they’re holding
+        String suffix = variantSuffix(rawTypeId);
+        if (!suffix.isEmpty()) {
+            tooltip.add(Component.literal(suffix.trim())); // e.g. "(Infused)"
+        }
 
         super.appendHoverText(stack, level, tooltip, flag);
     }
@@ -67,7 +95,7 @@ public class TintedWaterBucketItem extends BucketItem {
         }
 
         int typeId = getTypeId(stack);
-        if (typeId < 0 || typeId >= 256) {
+        if (!isValidTypeId(typeId)) {
             return InteractionResultHolder.fail(stack);
         }
 
@@ -125,5 +153,38 @@ public class TintedWaterBucketItem extends BucketItem {
 
     public static void setTypeId(ItemStack stack, int typeId) {
         stack.setDamageValue(typeId);
+    }
+
+    private static boolean isValidTypeId(int typeId) {
+        return typeId >= 0 && typeId < MAX_TYPE_ID;
+    }
+
+    /**
+     * For dyes, collapse the 4-variant ids back to the base dye id for display lookups.
+     * For non-dyes, returns unchanged.
+     */
+    private static int normalizeForNaming(int typeId) {
+        if (!isDyeType(typeId)) return typeId;
+        return typeId - ((typeId - DYE_START) & 3);
+    }
+
+    private static boolean isDyeType(int typeId) {
+        // Match your clamp logic conceptually (start at DYE_START, 4-wide blocks)
+        return typeId >= DYE_START;
+    }
+
+    private static int dyeVariant(int typeId) {
+        if (!isDyeType(typeId)) return 0;
+        return (typeId - DYE_START) & 3;
+    }
+
+    private static String variantSuffix(int typeId) {
+        if (!isDyeType(typeId)) return "";
+        return switch (dyeVariant(typeId)) {
+            case 1 -> " (Infused)";
+            case 2 -> " (Radiant)";
+            case 3 -> " (Infused Radiant)";
+            default -> "";
+        };
     }
 }

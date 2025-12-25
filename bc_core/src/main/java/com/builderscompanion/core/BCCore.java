@@ -1,13 +1,12 @@
 package com.builderscompanion.core;
 
 import com.builderscompanion.core.client.FluidRenderSetup;
+import com.builderscompanion.core.registry.tintedliquids.TintedLiquidsBlockEntity;
 import com.builderscompanion.core.registry.tintedliquids.TintedLiquidsItems;
 import com.builderscompanion.core.registry.tintedliquids.TintedLiquidsRegistry;
 import com.builderscompanion.core.util.BCLogger;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
@@ -28,22 +27,35 @@ public class BCCore {
         TintedLiquidsRegistry.FLUID_TYPES.register(modBus);
         TintedLiquidsRegistry.FLUIDS.register(modBus);
         TintedLiquidsRegistry.BLOCKS.register(modBus);
+        TintedLiquidsBlockEntity.BLOCK_ENTITIES.register(modBus);
 
         // Setup events
         modBus.addListener(this::commonSetup);
+        modBus.addListener(this::onLoadComplete);
 
         // Fluid Registry
         if (FMLEnvironment.dist == Dist.CLIENT) {
             modBus.addListener(FluidRenderSetup::clientSetup);
+            //modBus.addListener(com.builderscompanion.core.client.ColorHandlers::registerBlockColors);
+            //modBus.addListener(com.builderscompanion.core.client.ColorHandlers::registerItemColors);
         }
+
+
+        BCLogger.info("BC Core initialized");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(com.builderscompanion.core.util.CauldronUtil::init);
         event.enqueueWork(() -> {
             BCLogger.info("Builders Companion Core - Common Setup");
-
             BCLogger.info("BC-Core initialization complete");
         });
     }
 
+    private void onLoadComplete(final FMLLoadCompleteEvent event) {
+        event.enqueueWork(() -> {
+            BCLogger.info("BC Core: Load complete, populating fluid arrays...");
+            TintedLiquidsRegistry.populateArrays();
+        });
+    }
 }
