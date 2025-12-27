@@ -33,6 +33,12 @@ public class DyedWaterProvider implements TintedLiquidProvider {
     }
 
     @Override
+    public int getRgbColor(int typeId) {
+        DyedColorRegistry.ColorEntry entry = DyedColorRegistry.getEntryByTypeId(typeId);
+        return entry != null ? entry.rgb : 0xFFFFFFFF;
+    }
+
+    @Override
     public List<Component> getTooltipLines(int typeId) {
         return Collections.emptyList();
     }
