@@ -138,7 +138,7 @@ public class WaterColorRegistry {
         } catch (IOException e) {
             BCLogger.error("Failed to load water color registry: {}", e.getMessage());
         }
-
+        /* Debug
         BCLogger.info("Unique colors breakdown:");
         for (ColorEntry entry : uniqueColors.values()) {
             BCLogger.info(
@@ -147,7 +147,7 @@ public class WaterColorRegistry {
                     Integer.toHexString(entry.rgb),
                     entry.category
             );
-        }
+        }*/
     }
 
     public static ColorEntry getEntryByTypeId(int typeId) {

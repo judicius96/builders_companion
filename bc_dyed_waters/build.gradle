@@ -1,4 +1,4 @@
-// bc_biome_waters subproject build configuration
+// bc_dyed_waters subproject build configuration
 repositories {
     mavenCentral()
     maven {
@@ -10,6 +10,7 @@ repositories {
 dependencies {
     // Depend on bc_core
     implementation project(':bc_core')
+
 
 }
 

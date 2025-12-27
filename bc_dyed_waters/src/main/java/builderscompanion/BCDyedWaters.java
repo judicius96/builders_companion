@@ -3,9 +3,9 @@ package com.builderscompanion.dyedwaters;
 import com.builderscompanion.core.api.TintedLiquidProviderRegistry;
 import com.builderscompanion.core.registry.tintedliquids.TintedLiquidsRegistry;
 import com.builderscompanion.core.util.BCLogger;
-import com.builderscompanion.dyedwaters.registry.DyedColorRegistry;
 import com.builderscompanion.dyedwaters.provider.DyedWaterProvider;
-
+import com.builderscompanion.dyedwaters.recipes.RecipeRegistry;
+import com.builderscompanion.dyedwaters.registry.DyedColorRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -23,6 +23,10 @@ public class BCDyedWaters {
         BCLogger.info("Dyed Waters initializing...");
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        // Register recipes
+        RecipeRegistry.SERIALIZERS.register(modBus);
+        RecipeRegistry.TYPES.register(modBus);
 
         // Load dye color data
         DyedColorRegistry.loadFromClasspath();

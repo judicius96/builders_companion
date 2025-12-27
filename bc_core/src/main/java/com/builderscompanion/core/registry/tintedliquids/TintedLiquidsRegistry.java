@@ -2,7 +2,6 @@ package com.builderscompanion.core.registry.tintedliquids;
 
 import com.builderscompanion.core.BCCore;
 import com.builderscompanion.core.util.BCLogger;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -44,13 +43,6 @@ public class TintedLiquidsRegistry {
 
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, BCCore.MODID);
-
-    public static final RegistryObject<Block> TINTED_WATER_CAULDRON =
-            BLOCKS.register("tinted_water_cauldron",
-                    () -> new com.builderscompanion.core.block.tintedliquids.TintedWaterCauldronBlock(
-                            BlockBehaviour.Properties.copy(Blocks.WATER_CAULDRON)
-                    ));
-
 
     /* -------------------------------------------------------------------------
      * Internal Registries
@@ -178,7 +170,7 @@ public class TintedLiquidsRegistry {
                     "tinted_water_block_" + idSuffix,
                     () -> new LiquidBlock(
                             () -> stillHolder[0].get(),  // ← Use local holder
-                            BlockBehaviour.Properties.of()
+                            BlockBehaviour.Properties.copy(Blocks.WATER)
                                     .mapColor(MapColor.WATER)
                                     .replaceable()
                                     .noCollission()

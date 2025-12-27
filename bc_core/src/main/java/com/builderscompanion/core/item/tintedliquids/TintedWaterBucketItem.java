@@ -55,8 +55,8 @@ public class TintedWaterBucketItem extends BucketItem {
         }
 
         // Optional suffix so the four states actually read differently in-game
-        String suffix = variantSuffix(rawTypeId);
-        return suffix.isEmpty() ? baseName : Component.literal(baseName.getString() + suffix);
+        String prefix = variantPrefix(rawTypeId);
+        return prefix.isEmpty() ? baseName : Component.literal(prefix + baseName.getString());
     }
 
     @Override
@@ -74,12 +74,6 @@ public class TintedWaterBucketItem extends BucketItem {
         List<Component> lines = TintedLiquidProviderRegistry.getTooltipLines(baseTypeId);
         if (lines != null && !lines.isEmpty()) {
             tooltip.addAll(lines);
-        }
-
-        // Add a simple state line so players can tell which variant they’re holding
-        String suffix = variantSuffix(rawTypeId);
-        if (!suffix.isEmpty()) {
-            tooltip.add(Component.literal(suffix.trim())); // e.g. "(Infused)"
         }
 
         super.appendHoverText(stack, level, tooltip, flag);
@@ -178,12 +172,12 @@ public class TintedWaterBucketItem extends BucketItem {
         return (typeId - DYE_START) & 3;
     }
 
-    private static String variantSuffix(int typeId) {
+    private static String variantPrefix(int typeId) {
         if (!isDyeType(typeId)) return "";
         return switch (dyeVariant(typeId)) {
-            case 1 -> " (Infused)";
-            case 2 -> " (Radiant)";
-            case 3 -> " (Infused Radiant)";
+            case 1 -> "Infused ";
+            case 2 -> "Radiant ";
+            case 3 -> "Infused Radiant ";
             default -> "";
         };
     }

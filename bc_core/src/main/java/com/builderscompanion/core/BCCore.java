@@ -36,16 +36,12 @@ public class BCCore {
         // Fluid Registry
         if (FMLEnvironment.dist == Dist.CLIENT) {
             modBus.addListener(FluidRenderSetup::clientSetup);
-            //modBus.addListener(com.builderscompanion.core.client.ColorHandlers::registerBlockColors);
-            //modBus.addListener(com.builderscompanion.core.client.ColorHandlers::registerItemColors);
         }
-
 
         BCLogger.info("BC Core initialized");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(com.builderscompanion.core.util.CauldronUtil::init);
         event.enqueueWork(() -> {
             BCLogger.info("Builders Companion Core - Common Setup");
             BCLogger.info("BC-Core initialization complete");

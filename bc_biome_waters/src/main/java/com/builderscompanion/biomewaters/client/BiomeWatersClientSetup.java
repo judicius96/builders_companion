@@ -15,17 +15,7 @@ public final class BiomeWatersClientSetup {
         event.enqueueWork(() -> {
             ItemColors itemColors = Minecraft.getInstance().getItemColors();
 
-            itemColors.register((stack, tintIndex) -> {
-                // Only tint the liquid layer
-                if (tintIndex != 1) return 0xFFFFFFFF; // or -1
-
-                int typeId = stack.getDamageValue(); // your typeId storage
-                var entry = com.builderscompanion.biomewaters.registry.WaterColorRegistry.getEntryByTypeId(typeId);
-                if (entry == null) return 0xFFFFFFFF;
-
-                // entry.rgb is 0xRRGGBB; ItemColors wants that
-                return entry.rgb;
-            }, com.builderscompanion.core.registry.tintedliquids.TintedLiquidsItems.TINTED_WATER_BUCKET.get());
+            com.builderscompanion.core.registry.tintedliquids.TintedLiquidsItems.TINTED_WATER_BUCKET.get();
         });
     }
 
