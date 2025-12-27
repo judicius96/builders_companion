@@ -45,6 +45,12 @@ public class BiomeWaterProvider implements TintedLiquidProvider {
     }
 
     @Override
+    public int getRgbColor(int typeId) {
+        WaterColorRegistry.ColorEntry entry = WaterColorRegistry.getEntryByTypeId(typeId);
+        return entry != null ? entry.rgb : 0xFFFFFFFF;
+    }
+
+    @Override
     public List<Component> getTooltipLines(int typeId) {
         List<WaterColorRegistry.ColorEntry> colors = WaterColorRegistry.getUniqueColors();
         if (typeId < 0 || typeId >= colors.size()) {

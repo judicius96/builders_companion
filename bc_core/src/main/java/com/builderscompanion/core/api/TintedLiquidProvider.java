@@ -28,4 +28,6 @@ public interface TintedLiquidProvider {
      * Check if this provider handles the given typeId
      */
     boolean handlesTypeId(int typeId);
+
+    int getRgbColor(int typeId);
 }

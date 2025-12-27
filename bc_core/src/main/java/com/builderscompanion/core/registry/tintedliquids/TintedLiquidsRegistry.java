@@ -6,8 +6,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,9 +25,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;  // ← ADD THIS
 import java.util.HashMap;
-import java.util.List;        // ← ADD THIS
+import java.util.List;
 import java.util.Map;
 
 public class TintedLiquidsRegistry {
@@ -41,15 +44,6 @@ public class TintedLiquidsRegistry {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, BCCore.MODID);
 
-    public static List<RegistryObject<ForgeFlowingFluid>> getAllStillFluids() {
-        return new ArrayList<>(stillFluidRegistry.values());
-    }
-
-    public static List<RegistryObject<ForgeFlowingFluid>> getAllFlowingFluids() {
-        return new ArrayList<>(flowingFluidRegistry.values());
-    }
-
-
     /* -------------------------------------------------------------------------
      * Internal Registries
      * ------------------------------------------------------------------------- */
@@ -63,22 +57,45 @@ public class TintedLiquidsRegistry {
      * Public Lookup Arrays
      * ------------------------------------------------------------------------- */
 
-    public static final FluidType[] FLUID_TYPES_ARRAY = new FluidType[256];
-    public static final Fluid[] STILL_FLUIDS = new Fluid[256];
-    public static final Fluid[] FLOWING_FLUIDS = new Fluid[256];
-    public static final LiquidBlock[] LIQUID_BLOCKS = new LiquidBlock[256];
+    public static final FluidType[] FLUID_TYPES_ARRAY =
+            new FluidType[TintedIdRanges.MAX_TYPE_ID];
+
+    public static final Fluid[] STILL_FLUIDS =
+            new Fluid[TintedIdRanges.MAX_TYPE_ID];
+
+    public static final Fluid[] FLOWING_FLUIDS =
+            new Fluid[TintedIdRanges.MAX_TYPE_ID];
+
+    public static final LiquidBlock[] LIQUID_BLOCKS =
+            new LiquidBlock[TintedIdRanges.MAX_TYPE_ID];
+
+
+    /* -------------------------------------------------------------------------
+     * Dye Variant Helpers
+     * ------------------------------------------------------------------------- */
+
+    private static boolean isDyeType(int typeId) {
+        return typeId >= TintedIdRanges.DYE_START && typeId < TintedIdRanges.DYE_END_EXCLUSIVE;
+    }
+
+    private static int dyeVariant(int typeId) {
+        if (!isDyeType(typeId)) return 0;
+        return (typeId - TintedIdRanges.DYE_START) & 3; // 0..3
+    }
+
+    private static boolean isInfused(int typeId) {
+        int v = dyeVariant(typeId);
+        return v == 1 || v == 3;
+    }
+
+    private static boolean isRadiant(int typeId) {
+        int v = dyeVariant(typeId);
+        return v == 2 || v == 3;
+    }
 
     /* -------------------------------------------------------------------------
      * Registration
      * ------------------------------------------------------------------------- */
-
-    private static final List<ColorRegistration> SUBMITTED_COLORS = new ArrayList<>();
-
-    public static List<ColorRegistration> getSubmittedColors() {
-        return List.copyOf(SUBMITTED_COLORS);
-    }
-
-    //private static final List<ColorRegistration> pendingRegistrations = new ArrayList<>();
 
     // Add this inner class
     public static class ColorRegistration {
@@ -93,11 +110,8 @@ public class TintedLiquidsRegistry {
         }
     }
 
-    // Replace registerAll() with this:
+    // Register Colors in Array
     public static void registerColors(List<ColorRegistration> colors) {
-        SUBMITTED_COLORS.clear();
-        SUBMITTED_COLORS.addAll(colors);
-
         BCLogger.info("Registering {} tinted water variants...", colors.size());
 
         for (ColorRegistration entry : colors) {
@@ -105,37 +119,35 @@ public class TintedLiquidsRegistry {
             final int rgb = entry.rgb;
             final String idSuffix = String.format("%03d", typeId);
 
-            /* ---------------- FluidType (tint + textures) ---------------- */
+            /* ---------------- FluidType ---------------- */
             RegistryObject<FluidType> fluidType = FLUID_TYPES.register(
                     "tinted_water_" + idSuffix,
                     () -> new FluidType(FluidType.Properties.create()
                             .density(1000)
-                            .viscosity(1000)
-                            .canDrown(true)
-                            .canSwim(true)
-                            .supportsBoating(true)
-                            .canHydrate(true)
-                            .canExtinguish(true)
-                            .motionScale(0.014D)
-                            .fallDistanceModifier(0.0F)
-                    ) {
+                            .viscosity(1000)) {
 
                         @Override
                         public void initializeClient(java.util.function.Consumer<IClientFluidTypeExtensions> consumer) {
                             consumer.accept(new IClientFluidTypeExtensions() {
-                                private static final ResourceLocation STILL =
+
+                                private final ResourceLocation STILL =
                                         new ResourceLocation(BCCore.MODID, "block/water_still");
-                                private static final ResourceLocation FLOWING =
+                                private final ResourceLocation FLOWING =
                                         new ResourceLocation(BCCore.MODID, "block/water_flow");
+
+                                private final ResourceLocation STILL_INFUSED =
+                                        new ResourceLocation(BCCore.MODID, "block/water_still_infused");
+                                private final ResourceLocation FLOWING_INFUSED =
+                                        new ResourceLocation(BCCore.MODID, "block/water_flow_infused");
 
                                 @Override
                                 public ResourceLocation getStillTexture() {
-                                    return STILL;
+                                    return isInfused(typeId) ? STILL_INFUSED : STILL;
                                 }
 
                                 @Override
                                 public ResourceLocation getFlowingTexture() {
-                                    return FLOWING;
+                                    return isInfused(typeId) ? FLOWING_INFUSED : FLOWING;
                                 }
 
                                 @Override
@@ -148,18 +160,24 @@ public class TintedLiquidsRegistry {
             );
             fluidTypeRegistry.put(typeId, fluidType);
 
+            /* ---------------- Still / Flowing Fluids (REGISTER EARLY) ---------------- */
+            // Create RegistryObjects first so they can be referenced
+            final RegistryObject<ForgeFlowingFluid>[] stillHolder = new RegistryObject[1];
+            final RegistryObject<ForgeFlowingFluid>[] flowingHolder = new RegistryObject[1];
+
             /* ---------------- Liquid Block ---------------- */
             RegistryObject<LiquidBlock> liquidBlock = BLOCKS.register(
                     "tinted_water_block_" + idSuffix,
                     () -> new LiquidBlock(
-                            () -> stillFluidRegistry.get(typeId).get(),
-                            BlockBehaviour.Properties.of()
+                            () -> stillHolder[0].get(),  // ← Use local holder
+                            BlockBehaviour.Properties.copy(Blocks.WATER)
                                     .mapColor(MapColor.WATER)
                                     .replaceable()
                                     .noCollission()
                                     .strength(100.0F)
                                     .noLootTable()
                                     .liquid()
+                                    .lightLevel(state -> isRadiant(typeId) ? 12 : 0)
                     )
             );
             liquidBlockRegistry.put(typeId, liquidBlock);
@@ -167,8 +185,8 @@ public class TintedLiquidsRegistry {
             /* ---------------- ForgeFlowingFluid.Properties ---------------- */
             ForgeFlowingFluid.Properties props = new ForgeFlowingFluid.Properties(
                     fluidType,
-                    () -> stillFluidRegistry.get(typeId).get(),
-                    () -> flowingFluidRegistry.get(typeId).get()
+                    () -> stillHolder[0].get(),   // ← Use local holder
+                    () -> flowingHolder[0].get()  // ← Use local holder
             )
                     .block(liquidBlock)
                     .slopeFindDistance(4)
@@ -176,17 +194,19 @@ public class TintedLiquidsRegistry {
                     .tickRate(5)
                     .explosionResistance(100.0F);
 
-            /* ---------------- Still / Flowing Fluids ---------------- */
+            /* ---------------- Still / Flowing Fluids (ACTUAL REGISTRATION) ---------------- */
             RegistryObject<ForgeFlowingFluid> still = FLUIDS.register(
                     "tinted_water_still_" + idSuffix,
                     () -> new TintedSource(props)
             );
+            stillHolder[0] = still;
             stillFluidRegistry.put(typeId, still);
 
             RegistryObject<ForgeFlowingFluid> flowing = FLUIDS.register(
                     "tinted_water_flowing_" + idSuffix,
                     () -> new TintedFlowing(props)
             );
+            flowingHolder[0] = flowing;
             flowingFluidRegistry.put(typeId, flowing);
         }
 
@@ -201,6 +221,10 @@ public class TintedLiquidsRegistry {
         BCLogger.info("  liquidBlockRegistry: {}", liquidBlockRegistry.size());
 
         for (int i : fluidTypeRegistry.keySet()) {
+            if (i < 0 || i >= TintedIdRanges.MAX_TYPE_ID) {
+                BCLogger.error("TypeId {} out of bounds for arrays (0..319). Skipping.", i);
+                continue;
+            }
             FLUID_TYPES_ARRAY[i] = fluidTypeRegistry.get(i).get();
             STILL_FLUIDS[i] = stillFluidRegistry.get(i).get();
             FLOWING_FLUIDS[i] = flowingFluidRegistry.get(i).get();
@@ -209,14 +233,15 @@ public class TintedLiquidsRegistry {
 
         BCLogger.info("Populated fluid arrays for {} types", fluidTypeRegistry.size());
 
+        /* Debug check
         if (fluidTypeRegistry.containsKey(76)) {
             BCLogger.info("TypeId 76 exists in registry!");
             BCLogger.info("  LIQUID_BLOCKS[76] = {}", LIQUID_BLOCKS[76]);
         } else {
             BCLogger.error("TypeId 76 NOT in registry! Keys present: {}", fluidTypeRegistry.keySet());
         }
+        */
     }
-
 
     /* -------------------------------------------------------------------------
      * Custom Forge fluids

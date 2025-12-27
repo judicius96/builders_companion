@@ -1,5 +1,6 @@
 package com.builderscompanion.biomewaters.registry;
 
+import com.builderscompanion.core.registry.tintedliquids.TintedIdRanges;
 import com.builderscompanion.core.util.BCLogger;
 
 import java.io.BufferedReader;
@@ -48,6 +49,7 @@ public class WaterColorRegistry {
             int totalEntries = 0;
             int defaultColorCount = 0;
 
+            // skip header
             reader.readLine();
             lineNum++;
 
@@ -77,6 +79,7 @@ public class WaterColorRegistry {
 
                 totalEntries++;
 
+                // Skip vanilla default water color
                 if (color == 0x3F76E4) {
                     defaultColorCount++;
                     continue;
@@ -84,22 +87,41 @@ public class WaterColorRegistry {
 
                 if ("biome".equals(category)) {
                     biomeColors.put(sourceId, color);
-                    primaryBiomeForColor.putIfAbsent(color, formatBiomeName(extractPath(sourceId)));
+                    primaryBiomeForColor.putIfAbsent(
+                            color,
+                            formatBiomeName(extractPath(sourceId))
+                    );
                 } else if ("dye".equals(category)) {
                     dyeColors.put(sourceId, color);
                 } else {
-                    BCLogger.warn("Unexpected category '{}' in biome_colors.txt on line {}", category, lineNum);
+                    BCLogger.warn(
+                            "Unexpected category '{}' in biome_colors.txt on line {}",
+                            category, lineNum
+                    );
                     continue;
                 }
 
+                // Allocate biome TypeIDs strictly below dye start
                 if (!uniqueColors.containsKey(color)) {
-                    int typeId = uniqueColors.size();
-                    ColorEntry ce = new ColorEntry(typeId, color, category);
+                    int nextTypeId = uniqueColors.size();
+
+                    if (nextTypeId >= TintedIdRanges.DYE_START) {
+                        BCLogger.error(
+                                "BiomeWaters exceeded biome tint budget ({}). " +
+                                        "Skipping rgb=0x{} sourceId={}",
+                                TintedIdRanges.DYE_START,
+                                Integer.toHexString(color),
+                                sourceId
+                        );
+                        continue;
+                    }
+
+                    ColorEntry ce = new ColorEntry(nextTypeId, color, category);
                     uniqueColors.put(color, ce);
                 }
             }
 
-            // build cache ONCE
+            // Build reverse lookup cache ONCE
             for (ColorEntry entry : uniqueColors.values()) {
                 entriesByTypeId.put(entry.typeId, entry);
             }
@@ -116,19 +138,21 @@ public class WaterColorRegistry {
         } catch (IOException e) {
             BCLogger.error("Failed to load water color registry: {}", e.getMessage());
         }
-
+        /* Debug
         BCLogger.info("Unique colors breakdown:");
         for (ColorEntry entry : uniqueColors.values()) {
-            BCLogger.info("  typeId={} rgb=0x{} category={}",
-                    entry.typeId, Integer.toHexString(entry.rgb), entry.category);
-        }
+            BCLogger.info(
+                    "  typeId={} rgb=0x{} category={}",
+                    entry.typeId,
+                    Integer.toHexString(entry.rgb),
+                    entry.category
+            );
+        }*/
     }
 
     public static ColorEntry getEntryByTypeId(int typeId) {
         return entriesByTypeId.get(typeId);
     }
-
-
 
     /**
      * Get primary/canonical biome display name for a color.
@@ -141,7 +165,11 @@ public class WaterColorRegistry {
     public static Integer getBiomeColor(String biomeId) {
         return biomeColors.get(biomeId);
     }
-    public static Integer getDyeColor(String dyeId) { return dyeColors.get(dyeId); }
+
+    public static Integer getDyeColor(String dyeId) {
+        return dyeColors.get(dyeId);
+    }
+
     public static List<ColorEntry> getUniqueColors() {
         return new ArrayList<>(uniqueColors.values());
     }
@@ -174,9 +202,10 @@ public class WaterColorRegistry {
     }
 
     private static String extractPath(String id) {
-        // "minecraft:swamp" -> "swamp"
         int idx = id.indexOf(':');
-        return (idx >= 0 && idx + 1 < id.length()) ? id.substring(idx + 1) : id;
+        return (idx >= 0 && idx + 1 < id.length())
+                ? id.substring(idx + 1)
+                : id;
     }
 
     private static String formatBiomeName(String name) {

@@ -1,0 +1,70 @@
+// bc_dyed_waters subproject build configuration
+repositories {
+    mavenCentral()
+    maven {
+        url "https://cursemaven.com/"
+        content { includeGroup "curse.maven" }
+    }
+}
+
+dependencies {
+    // Depend on bc_core
+    implementation project(':bc_core')
+
+
+}
+
+minecraft {
+    runs {
+        configureEach {
+            // Ensure bc_core's embedded dev dependencies (SnakeYAML, etc.) are on the classpath
+            lazyToken('minecraft_classpath') {
+                project(":bc_core").configurations.embed.copyRecursive().resolve()
+                        .collect { it.absolutePath }
+                        .join(File.pathSeparator)
+            }
+
+            mods {
+                bc_biome_waters {
+                    source sourceSets.main
+                }
+                bc_core {
+                    source project(':bc_core').sourceSets.main
+                }
+            }
+        }
+
+        client {
+
+            property 'forge.enabledGameTestNamespaces', 'bc_biome_waters'
+        }
+
+        server {
+
+            property 'forge.enabledGameTestNamespaces', 'bc_biome_waters'
+        }
+
+        data {
+            args '--mod', 'bc_biome_waters', '--all', '--existing', file('src/main/resources/')
+        }
+    }
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version: forge_version, forge_version_range: forge_version_range,
+            loader_version_range: loader_version_range,
+            mod_id: 'bc_biome_waters',
+            mod_name: 'Builders Companion Biome Waters',
+            mod_license: mod_license,
+            mod_version: '1.20.1-1.0.0',
+            mod_authors: mod_authors,
+            mod_description: 'Biome Waters module for Builders Companion mod'
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
